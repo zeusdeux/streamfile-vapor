@@ -1,0 +1,16 @@
+#extend("base")
+
+#export("head") {
+	<title>Streamfile in Vapor</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,300" rel="stylesheet" />
+	<link rel="stylesheet" href="/styles/app.css" />
+}
+
+#export("body") {
+  <main class="app">
+    <form class="form" action="/tail" method="GET">
+      <input class="form__input" name="filename" type="text" value="" placeholder="Enter file name" />
+    </form>
+  </main>
+}

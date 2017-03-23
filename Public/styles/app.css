@@ -31,4 +31,10 @@ body {
   width: 100%;
   padding: 10px;
   font-size: inherit;
+  border-width: 0;
+  border-bottom: 1px solid #a2a2a2;
+}
+
+.form__input:focus {
+  outline: 0;
 }

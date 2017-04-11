@@ -4,14 +4,14 @@ import HTTP
 
 final class TailController: ResourceRepresentable {
     func index(_ req: Request) throws -> ResponseRepresentable {
-        guard let filename = req.data["filename"]?.string else {
+        guard let filePath = req.data["filename"]?.string else {
             throw Abort.badRequest
         }
 
         let task = Process()
 
         task.launchPath = "/usr/bin/tail"
-        task.arguments = ["-n 10", filename]
+        task.arguments = ["-n 10", filePath]
 
         let pipe = Pipe()
         task.standardOutput = pipe
@@ -20,8 +20,9 @@ final class TailController: ResourceRepresentable {
 
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
+        let filename = filePath.components(separatedBy: "/").last!
 
-        return "Filename is \(output!)"
+        return "Filename is \(filename)\n\(output!)"
     }
 
     func makeResource() -> Resource<Int> {

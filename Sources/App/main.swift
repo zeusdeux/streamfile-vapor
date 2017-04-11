@@ -6,6 +6,6 @@ drop.get { req in
     return try drop.view.make("index")
 }
 
-drop.resource("tail", Tailer())
+drop.resource("tail", TailController())
 
 drop.run()
